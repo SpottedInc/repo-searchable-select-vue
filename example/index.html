@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Repo Searchable Select Vue - Example Page</title>
+    <link rel="stylesheet" type="text/css" href="//abtzlabs.github.io/seed-css/assets/css/seed.css?v=v2.2.6" />
+  </head>
+
+  <body>
+    <div id="app" class="container my-20">
+      <h1>REPO SEARCHABLE SELECT</h1>
+
+      <div>
+        <div class="field seed-select" v-bind:class="{'has-feedback': hasFeedback}">
+          <label>Test:</label>
+          <repo-searchable-select
+            name="my-select"
+            id="my-select-id"
+            required
+            v-bind:options="options"
+            v-bind:value="selected"
+            v-on:change="onChange"
+            placeholder="Type something ..."
+          ></repo-searchable-select>
+          <span class="error" v-if="hasFeedback">Mandadory field!</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="../dist/repo-searchable-select-vue.min.js"></script>
+
+    <script>
+      Vue.component(RepoSearchableSelect);
+
+      var app = new Vue({
+        el: '#app',
+
+        data() {
+          return {
+            hasFeedback: false,
+
+            required: true,
+
+            options: [
+              { id: '', value: '' },
+              { id: '0', value: 'Zero' },
+              { id: '1', value: 'One' },
+              { id: '2', value: 'Two' },
+              { id: '3', value: 'Three' },
+              { id: '4', value: 'Four' },
+              { id: '5', value: 'Five' },
+              { id: '6', value: 'Six' },
+              { id: '7', value: 'Seven' },
+              { id: '8', value: 'Eight' },
+              { id: '9', value: 'Nine' },
+              { id: '10', value: 'Ten' },
+              { id: '11', value: 'Eleven' },
+              { id: '12', value: 'Twelve' },
+              { id: '13', value: 'Thirteen' },
+              { id: '14', value: 'Fourteen' },
+              { id: '15', value: 'Fifteen' },
+              { id: '16', value: 'Sixteen' },
+              { id: '17', value: 'Seventeen' },
+              { id: '18', value: 'Eighteen' },
+              { id: '19', value: 'Nineteen' },
+              { id: '20', value: 'Twenty' }
+            ],
+
+            selected: 'Nine'
+          };
+        },
+
+        methods: {
+          onChange(data) {
+            this.hasFeedback = !data && this.required;
+            console.log('CHANGED', data);
+            console.log(
+              'GET DOM',
+              document.querySelector('#my-select-id').value,
+              document.querySelector('[name="my-select"]').value
+            );
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
