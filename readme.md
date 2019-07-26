@@ -22,6 +22,7 @@ However, when it comes to the mobile browsers, the user experience is actually r
 
 #### The solution
 
+![alt text](./screenshot.png "Repo Tenshoku Team")
 
 _Repo Searchable Select_ mixes 2 `HTML5` elements (`HTMLInputElement` and `HTMLDatalistElement`) to create a smooth, highly customizable and transparent solution that work very well for both desktop and mobile devices, yet providing the needed searchable capability to (what looks like) a `HTMLSelectElement`.
 
