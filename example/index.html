@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Repo Searchable Select Vue - Example Page</title>
     <link rel="stylesheet" type="text/css" href="//abtzlabs.github.io/seed-css/assets/css/seed.css?v=v2.2.6" />
+    <style >
+    .testing { background-color: blue;}
+    </style>
   </head>
 
   <body>
@@ -14,7 +17,7 @@
 
       <div>
         <div class="field seed-select" v-bind:class="{'has-feedback': hasFeedback}">
-          <label>Test:</label>
+          <label>First:</label>
           <repo-searchable-select
             name="my-select"
             id="my-select-id"
@@ -22,9 +25,21 @@
             v-bind:options="options"
             v-bind:value="selected"
             v-on:change="onChange"
-            placeholder="Type something ..."
+            placeholder="Type something one ..."
           ></repo-searchable-select>
           <span class="error" v-if="hasFeedback">Mandadory field!</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="field seed-select">
+          <label>Second:</label>
+          <repo-searchable-select
+            name="my-2nd-select"
+            id="my-2nd-select-id"
+            v-bind:options="options"
+            placeholder="Type something two ..."
+          ></repo-searchable-select>
         </div>
       </div>
     </div>
@@ -76,12 +91,14 @@
         methods: {
           onChange(data) {
             this.hasFeedback = !data && this.required;
-            console.log('CHANGED', data);
-            console.log(
-              'GET DOM',
-              document.querySelector('#my-select-id').value,
-              document.querySelector('[name="my-select"]').value
-            );
+
+            if (data) {
+              console.log('CHANGED', data);
+              console.log(
+                'GET DOM',
+                document.querySelector(data.refer).value
+              );
+            }
           }
         }
       });
