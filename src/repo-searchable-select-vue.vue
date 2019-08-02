@@ -2,17 +2,17 @@
   <div class="repo-searchable-select-vue">
     <input 
       type="text"
-      list="repo--results"
-      id="repo--search" 
       autocomplete="off"
+      v-bind:list="`repo--results-${componentInternalID}`"
+      v-bind:id="`repo--search-${componentInternalID}`" 
       v-bind:value="selectedValue"
+      v-bind="$attrs"
+      v-bind:class="[{error: hasError}, {success: !hasError}]"
       v-on:focus="onInputFocus"
       v-on:change="(evt) => onInputChange(evt.currentTarget.value)"
-      v-bind="$attrs"
-      v-bind:class="{error: hasError, success: !hasError}"
     />
 
-    <datalist id="repo--results" >
+    <datalist v-bind:id="`repo--results-${componentInternalID}`" >
       <option
         v-for="option in options"
         v-bind:selected="option.id == selected"
@@ -51,18 +51,30 @@ export default {
       type: String,
       required: false,
       default: ""
+    },
+
+    additionalclass: {
+      type: String,
+      required: false,
+      default: ""
     }
   },
 
   data() {
     return {
+      componentInternalID: Math.random().toString(36).substring(2,9),
       selectedID: null,
       selectedValue: null,
       hasError: false
     };
   },
 
-  computed: {},
+  computed: {
+    classes() {
+      console.log('aa', this.additionalclass.split(' '));
+      return this.additionalclass.split(' ');
+    }
+  },
 
   methods: {
     onInputFocus(evt) {
@@ -110,7 +122,7 @@ export default {
     this.$emit(
       "change",
       this.selectedID
-        ? { id: this.selectedID, value: this.selectedValue }
+        ? { id: this.selectedID, value: this.selectedValue, refer: `#${this.id}` }
         : null
     );
   }
